@@ -4,10 +4,15 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+
+
 const config: Config = {
   title: 'Physical_AI_Book',
   tagline: 'A comprehensive guide to embodied intelligence and robotics.',
   favicon: 'img/favicon.ico',
+
+
+
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -35,11 +40,14 @@ const config: Config = {
     locales: ['en'],
   },
 
+  
+
   presets: [
     [
       'classic',
       {
         docs: {
+          routeBasePath: '/',
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -61,6 +69,8 @@ const config: Config = {
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
         },
+
+       
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -89,7 +99,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/ahteshamahmed12/Hackathon-Physical-AI-textbook',
           label: 'GitHub',
           position: 'right',
         },
