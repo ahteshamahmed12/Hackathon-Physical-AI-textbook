@@ -85,10 +85,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'My Site',
+      title: 'Physical AI & Humanoid Robotics Cource',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        
       },
       items: [
         {
@@ -97,22 +96,18 @@ const config: Config = {
           position: 'left',
           label: 'Tutorial',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/ahteshamahmed12/Hackathon-Physical-AI-textbook',
-          label: 'GitHub',
-          position: 'right',
-        },
+        
+        
       ],
     },
     footer: {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Learn',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Start Your Journey',
               to: '/docs/intro',
             },
           ],
