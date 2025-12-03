@@ -1,7 +1,7 @@
 <!-- Sync Impact Report:
-Version change: 0.0.0 -> 0.0.1
+Version change: 0.4.0 -> 0.5.0
 Modified principles:
-  - N/A (initial creation)
+  - Added Principle 11: Hardware Relevance
 Added sections:
   - Project Principles
   - Governance
@@ -19,7 +19,7 @@ Follow-up TODOs:
 
 ## Governance
 
-- **Constitution Version**: 0.0.1
+- **Constitution Version**: 0.5.0
 - **Ratification Date**: TODO(RATIFICATION_DATE): Needs to be set on initial ratification
 - **Last Amended Date**: 2025-12-04
 - **Amendment Procedure**: All amendments MUST be proposed as pull requests, reviewed, and approved by a consensus of core contributors. Minor (patch) updates may be fast-tracked; major (breaking) changes require a formal RFC process.
@@ -51,3 +51,23 @@ Follow-up TODOs:
 ### Principle 6: Documentation and Knowledge Sharing
 **Description**: Key architectural decisions, API contracts, and complex functionalities MUST be documented clearly and kept up-to-date. Knowledge sharing among the team is encouraged.
 **Rationale**: Good documentation reduces onboarding time for new contributors, ensures consistent understanding, and facilitates long-term project sustainability.
+
+### Principle 7: Scientific Grounding and Currency
+**Description**: All technical and theoretical claims MUST be backed by current research (ROS 2, Isaac Sim, VLA). Avoid speculative claims without academic citations. All concepts MUST be explained in a sequence that builds from fundamentals (Nodes \$\rightarrow\$ URDF \$\rightarrow\$ Simulation \$\rightarrow\$ Advanced AI).
+**Rationale**: Strict adherence to peer-reviewed research and a structured pedagogical approach ensures factual accuracy, builds foundational understanding, and maintains the project's authority and relevance in rapidly evolving scientific fields.
+
+### Principle 8: Content Formatting and Asset Management
+**Description**: All chapter files MUST use MDX (.md or .mdx) format. All static assets (images, diagrams) MUST be stored in `static/img` and referenced with correct Docusaurus paths.
+**Rationale**: Standardizing content and asset formats ensures consistency, improves maintainability, and leverages Docusaurus's optimized asset handling and rendering capabilities.
+
+### Principle 9: Code Snippet and ROS 2 Framework Consistency
+**Description**: All code snippets MUST be marked with the correct language (e.g., `python` or `bash`). ROS 2 code MUST exclusively use the `rclpy` (Python) framework for consistency and ease of understanding.
+**Rationale**: Proper language marking enhances readability and syntax highlighting. Standardizing on `rclpy` for ROS 2 code ensures a uniform approach, simplifies examples, and reduces potential confusion for contributors and readers.
+
+### Principle 10: Primary Theme Color
+**Description**: The project's primary theme color MUST be `#007ACC` (a professional blue), set via the `--ifm-color-primary` CSS variable.
+**Rationale**: Establishing a consistent brand color ensures a professional and unified visual identity across all documentation and interfaces, aligning with design guidelines.
+
+### Principle 11: Hardware Relevance
+**Description**: All modules MUST reference the Hardware Requirements defined in the project (e.g., the necessity of an RTX GPU, the role of the Jetson Orin) to maintain real-world relevance.
+**Rationale**: Explicitly linking modules to specific hardware requirements ensures the practical applicability of the project's solutions, guides hardware-software co-design, and manages expectations regarding performance and compatibility.
