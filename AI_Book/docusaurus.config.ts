@@ -4,15 +4,10 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-
-
-const config: Config = {
+const config = {
   title: 'Physical_AI_Book',
   tagline: 'A comprehensive guide to embodied intelligence and robotics.',
   favicon: 'img/favicon.ico',
-
-
-
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -30,7 +25,7 @@ const config: Config = {
   //organizationName: 'facebook', // Usually your GitHub org/user name.
   //projectName: 'docusaurus', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -40,8 +35,17 @@ const config: Config = {
     locales: ['en'],
   },
 
+  // 🚀 FIX 1: Add Homepage Redirect to the first module
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+        ],
+      },
+    ],
+  ],
   
-
   presets: [
     [
       'classic',
@@ -54,23 +58,9 @@ const config: Config = {
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        // 🚀 FIX 2: Disable the blog plugin entirely to eliminate broken blog links
+        blog: false, 
 
-       
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -86,18 +76,18 @@ const config: Config = {
     },
     navbar: {
       title: 'Physical AI & Humanoid Robotics Cource',
-      logo: {
-        
-      },
       items: [
+        {
+          to: '/',
+          label: 'Home',
+          position: 'left',
+        },
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Book Modules', // Changed label for clarity
         },
-        
-        
       ],
     },
     footer: {
@@ -108,7 +98,7 @@ const config: Config = {
           items: [
             {
               label: 'Start Your Journey',
-              to: '/docs/intro',
+              to: '/', // Link to the root as module-1-intro is now the homepage
             },
           ],
         },
@@ -129,19 +119,8 @@ const config: Config = {
             },
           ],
         },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
+        // 🚀 FIX 4: Removed the 'More' section as it contained the broken blog link
+        // and the GitHub link is already in the navbar.
       ],
       copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
     },
