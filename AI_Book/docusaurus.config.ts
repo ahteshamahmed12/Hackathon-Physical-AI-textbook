@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config = {
-  title: 'Physical_AI_Book',
+  title: 'Physical_AI_Book & Humanoid Robotics ',
   tagline: 'A comprehensive guide to embodied intelligence and robotics.',
   favicon: 'img/favicon.ico',
 
@@ -92,7 +92,7 @@ const config = {
           items: [
             {
               label: 'Start Your Journey',
-              to: '/', // Link to the root as module-1-intro is now the homepage
+              to: '/module-1-intro', // Link to the root as module-1-intro is now the homepage
             },
           ],
         },
