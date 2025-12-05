@@ -55,8 +55,6 @@ const config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         // 🚀 FIX 2: Disable the blog plugin entirely to eliminate broken blog links
         blog: false, 
@@ -77,16 +75,12 @@ const config = {
     navbar: {
       title: 'Physical AI & Humanoid Robotics Cource',
       items: [
-        {
-          to: '/',
-          label: 'Home',
-          position: 'left',
-        },
+        
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Book Modules', // Changed label for clarity
+          label: 'Book', // Changed label for clarity
         },
       ],
     },

@@ -16,8 +16,46 @@
   }
 }
 
-.buttons {
+.heroContent {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  gap: 2rem; /* Space between text and image */
+  padding: 2rem 0;
+}
+
+.heroTextContent {
+  flex: 1;
+  text-align: left;
+}
+
+.heroImageContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.heroImage:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 996px) {
+  .heroContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroTextContent {
+    text-align: center;
+  }
 }

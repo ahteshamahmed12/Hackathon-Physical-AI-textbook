@@ -17,17 +17,15 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: 'category',
-      label: 'Physical AI Book',
+      label: 'Physical AI & Humanoid Book',
       items: [
         'module-1-intro', // Corresponds to docs/module-1-intro.md
-        'module-2-core-concepts', // Corresponds to docs/module-2-core-concepts.md
-        'module-3-advanced-topics',
-        'module-4-conclusion',
+        'module-2-gazebo', // Corresponds to docs/module-2-gazebo.md
+        'module-3-isaac', // Corresponds to docs/module-3-isaac.md
+        'module-4-vla', // Corresponds to docs/module-4-vla.md
       ],
     },
   ],
 };
 
 export default sidebars;
-
-
