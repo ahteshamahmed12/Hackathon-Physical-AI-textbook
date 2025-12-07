@@ -247,7 +247,7 @@ Unfortunately, I couldn't find any relevant information in the documentation to 
         # Step 5: Call Anthropic Claude API to generate response
         try:
             message = anthropic_client.messages.create(
-                model="claude-3-5-sonnet-20240620",  # Using Claude 3.5 Sonnet (stable version)
+                model="claude-3-haiku-20240307",  # Using Claude 3 Haiku (most compatible)
                 max_tokens=1024,
                 messages=[
                     {
@@ -373,8 +373,8 @@ Please provide ONLY the translated markdown content, without any explanations or
         # Call Claude API for translation
         try:
             message = anthropic_client.messages.create(
-                model="claude-3-5-sonnet-20240620",  # Using Claude 3.5 Sonnet (stable version)
-                max_tokens=8192,  # Increased for longer documents
+                model="claude-3-haiku-20240307",  # Using Claude 3 Haiku (most compatible)
+                max_tokens=4096,  # Maximum for Claude 3 Haiku
                 messages=[
                     {
                         "role": "user",
