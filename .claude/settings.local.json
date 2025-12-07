@@ -12,7 +12,9 @@
       "Bash(ls:*)",
       "Bash(.specify/scripts/powershell/create-new-feature.ps1:*)",
       "Bash(.specify/scripts/bash/create-phr.sh:*)",
-      "Bash(.specify/scripts/powershell/setup-plan.ps1:*)"
+      "Bash(.specify/scripts/powershell/setup-plan.ps1:*)",
+      "Bash(.specify/scripts/bash/check-prerequisites.sh:*)",
+      "Bash(git rev-parse:*)"
     ],
     "deny": [],
     "ask": []
