@@ -1,0 +1,28 @@
+# FastAPI Backend Requirements for RAG Documentation Chatbot
+# Updated to use Google Gemini for embeddings
+
+# Core FastAPI framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+
+# Environment variable management
+python-dotenv==1.0.0
+
+# Pydantic for data validation (compatible with FastAPI)
+pydantic==2.5.3
+
+# Qdrant vector database client
+qdrant-client==1.7.3
+
+# LangChain for document processing
+langchain==0.1.5
+langchain-community==0.0.17
+
+# Google Generative AI (Gemini) for embeddings
+google-generativeai==0.8.3
+
+# Anthropic Claude API for response generation
+anthropic==0.18.1
+
+# Additional utilities
+httpx==0.26.0

@@ -82,6 +82,16 @@ const config = {
           position: 'left',
           label: 'Book', // Changed label for clarity
         },
+        {
+          type: 'html',
+          position: 'right',
+          value: '<a class="button button--secondary navbar-sign-in" href="/signin">Sign In</a>',
+        },
+        {
+          type: 'html',
+          position: 'right',
+          value: '<a class="button button--primary navbar-sign-up" href="/signup">Sign Up</a>',
+        },
       ],
     },
     footer: {

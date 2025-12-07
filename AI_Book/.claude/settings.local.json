@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(.specify/scripts/powershell/check-prerequisites.ps1:*)"
+      "Bash(.specify/scripts/powershell/check-prerequisites.ps1:*)",
+      "Bash(.specify/scripts/bash/create-phr.sh:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(mkdir:*)",
+      "Bash(history/prompts/general/create-phr.sh:*)",
+      "Bash(git fetch:*)",
+      "Bash(ls:*)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \".specify/scripts/powershell/create-new-feature.ps1\" -Json \"The system must successfully execute the following 5 tasks: Task 1 Setup, Task 2 Ingestion Script, Task 3 FastAPI Backend, Task 4 Frontend Widget, Task 5 Test\" -Number 1 -ShortName \"rag-doc-chatbot\")",
+      "Bash(pwsh:*)",
+      "Bash(git checkout:*)",
+      "Bash(git config:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
