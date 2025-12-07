@@ -34,12 +34,15 @@ app = FastAPI(
 )
 
 # Configure CORS middleware to allow requests from Docusaurus frontend
+# For development, we're permissive. Tighten this for production.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Docusaurus default port
+    allow_origins=["*"],  # Allow all origins for development (tighten for production)
     allow_credentials=True,
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
+    expose_headers=["*"],
+    max_age=3600,  # Cache preflight requests for 1 hour
 )
 
 # Validate required environment variables
@@ -66,7 +69,11 @@ if not all([QDRANT_URL, QDRANT_API_KEY, GEMINI_API_KEY, ANTHROPIC_API_KEY]):
 
 # Initialize clients
 try:
-    qdrant_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+    qdrant_client = QdrantClient(
+        url=QDRANT_URL,
+        api_key=QDRANT_API_KEY,
+        prefer_grpc=False,  # Use REST API instead of gRPC for better compatibility
+    )
     genai.configure(api_key=GEMINI_API_KEY)
     anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     print("✓ All API clients initialized successfully")
@@ -240,7 +247,7 @@ Unfortunately, I couldn't find any relevant information in the documentation to 
         # Step 5: Call Anthropic Claude API to generate response
         try:
             message = anthropic_client.messages.create(
-                model="claude-3-5-sonnet-20241022",  # Using Claude 3.5 Sonnet
+                model="claude-3-5-sonnet-20240620",  # Using Claude 3.5 Sonnet (stable version)
                 max_tokens=1024,
                 messages=[
                     {
@@ -278,6 +285,133 @@ Unfortunately, I couldn't find any relevant information in the documentation to 
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An unexpected error occurred: {str(e)}"
+        )
+
+
+# Pydantic model for translation request
+class TranslationRequest(BaseModel):
+    """Request model for translation endpoint"""
+    content: str = Field(
+        ...,
+        min_length=1,
+        max_length=50000,
+        description="Markdown content to translate to Urdu"
+    )
+    target_language: str = Field(
+        default="Urdu",
+        description="Target language for translation"
+    )
+
+    @validator('content')
+    def content_must_not_be_empty(cls, v):
+        """Validate that content is not just whitespace"""
+        if not v.strip():
+            raise ValueError('Content cannot be empty or whitespace only')
+        return v.strip()
+
+
+# Pydantic model for translation response
+class TranslationResponse(BaseModel):
+    """Response model for translation endpoint"""
+    translated_content: str = Field(
+        ...,
+        description="Translated markdown content"
+    )
+    original_length: int = Field(
+        ...,
+        description="Character count of original content"
+    )
+    translated_length: int = Field(
+        ...,
+        description="Character count of translated content"
+    )
+
+
+@app.post("/translate", response_model=TranslationResponse)
+async def translate_content(request: TranslationRequest):
+    """
+    Translate markdown documentation content to Urdu using Claude API.
+
+    This endpoint:
+    1. Receives markdown content in English
+    2. Sends it to Claude API with translation instructions
+    3. Returns the translated content in Urdu while preserving markdown formatting
+
+    Args:
+        request: TranslationRequest object containing content to translate
+
+    Returns:
+        TranslationResponse object with translated content
+
+    Raises:
+        HTTPException: For various error scenarios (400, 500, 503)
+    """
+    try:
+        # Construct translation prompt
+        translation_prompt = f"""You are an expert translator specializing in technical documentation.
+Your task is to translate the following markdown documentation from English to Urdu.
+
+IMPORTANT INSTRUCTIONS:
+1. Translate ALL text content to Urdu, including headings, paragraphs, list items, and table content
+2. PRESERVE all markdown formatting (headers #, lists -, code blocks ```, links, bold, italic, etc.)
+3. DO NOT translate:
+   - Code snippets within backticks or code blocks
+   - URLs and links
+   - Technical commands and code syntax
+   - File paths and system commands
+4. Maintain the document structure exactly as it appears
+5. Use clear, technical Urdu that would be understood by software engineers and robotics students
+6. Keep technical terms in English when no good Urdu equivalent exists, but explain them in Urdu
+7. Ensure the translation is accurate, natural-sounding, and professionally written
+
+CONTENT TO TRANSLATE:
+
+{request.content}
+
+Please provide ONLY the translated markdown content, without any explanations or additional text."""
+
+        # Call Claude API for translation
+        try:
+            message = anthropic_client.messages.create(
+                model="claude-3-5-sonnet-20240620",  # Using Claude 3.5 Sonnet (stable version)
+                max_tokens=8192,  # Increased for longer documents
+                messages=[
+                    {
+                        "role": "user",
+                        "content": translation_prompt
+                    }
+                ]
+            )
+
+            # Extract translated text
+            translated_content = message.content[0].text
+
+        except anthropic.APIError as e:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail=f"Claude API error during translation: {str(e)}"
+            )
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Failed to generate translation: {str(e)}"
+            )
+
+        # Return translation response
+        return TranslationResponse(
+            translated_content=translated_content,
+            original_length=len(request.content),
+            translated_length=len(translated_content)
+        )
+
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is
+        raise
+    except Exception as e:
+        # Catch any unexpected errors
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"An unexpected error occurred during translation: {str(e)}"
         )
 
 

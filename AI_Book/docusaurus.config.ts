@@ -85,6 +85,11 @@ const config = {
         {
           type: 'html',
           position: 'right',
+          value: '<div id="urdu-translator-root"></div>',
+        },
+        {
+          type: 'html',
+          position: 'right',
           value: '<a class="button button--secondary navbar-sign-in" href="/signin">Sign In</a>',
         },
         {
