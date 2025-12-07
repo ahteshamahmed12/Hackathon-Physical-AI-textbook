@@ -5,7 +5,14 @@
       "WebSearch",
       "Bash(powershell.exe -Command:*)",
       "Bash(where:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(npm install:*)",
+      "Bash(.specify/scripts/powershell/check-prerequisites.ps1:*)",
+      "Bash(git fetch:*)",
+      "Bash(ls:*)",
+      "Bash(.specify/scripts/powershell/create-new-feature.ps1:*)",
+      "Bash(.specify/scripts/bash/create-phr.sh:*)",
+      "Bash(.specify/scripts/powershell/setup-plan.ps1:*)"
     ],
     "deny": [],
     "ask": []
