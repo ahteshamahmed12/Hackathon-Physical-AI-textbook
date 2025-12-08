@@ -73,7 +73,7 @@ const config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Physical AI & Humanoid Robotics Cource',
+      title: 'Physical AI & Humanoid Robotics Course',
       items: [
         
         {
