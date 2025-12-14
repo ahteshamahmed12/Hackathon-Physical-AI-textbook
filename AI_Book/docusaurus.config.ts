@@ -40,8 +40,6 @@ const config = {
     [
       '@docusaurus/plugin-client-redirects',
       {
-        redirects: [
-        ],
       },
     ],
   ],
@@ -68,7 +66,7 @@ const config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+  
     colorMode: {
       respectPrefersColorScheme: true,
     },

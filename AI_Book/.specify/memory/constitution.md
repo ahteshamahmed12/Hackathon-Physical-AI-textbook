@@ -1,95 +1,55 @@
-<!-- Sync Impact Report:
-Version change: 0.6.0 -> 0.7.0
-Modified principles:
-  - Added Principle 13: AI Architecture - RAG System
-  - Added Principle 14: Vector Database and Embeddings
-  - Added Principle 15: Backend - FastAPI and Anthropic Model
-  - Added Principle 16: Frontend - React Chat Widget
-Added sections:
-  - N/A
-Removed sections:
-  - N/A
-Templates requiring updates:
-  - .specify/templates/plan-template.md: ⚠ pending
-  - .specify/templates/spec-template.md: ⚠ pending
-  - .specify/templates/tasks-template.md: ⚠ pending
-  - .specify/templates/commands/*.md: ⚠ pending
-Follow-up TODOs:
-  - TODO(RATIFICATION_DATE): Needs to be set on initial ratification
--->
-# Project Constitution: AI-powered Documentation Chatbot
+# [PROJECT_NAME] Constitution
+<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+
+## Core Principles
+
+### [PRINCIPLE_1_NAME]
+<!-- Example: I. Library-First -->
+[PRINCIPLE_1_DESCRIPTION]
+<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+
+### [PRINCIPLE_2_NAME]
+<!-- Example: II. CLI Interface -->
+[PRINCIPLE_2_DESCRIPTION]
+<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+
+### [PRINCIPLE_3_NAME]
+<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
+[PRINCIPLE_3_DESCRIPTION]
+<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+
+### [PRINCIPLE_4_NAME]
+<!-- Example: IV. Integration Testing -->
+[PRINCIPLE_4_DESCRIPTION]
+<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+
+### [PRINCIPLE_5_NAME]
+<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
+[PRINCIPLE_5_DESCRIPTION]
+<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+
+### [PRINCIPLE_6_NAME]
+
+
+[PRINCIPLE__DESCRIPTION]
+
+## [SECTION_2_NAME]
+<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+
+[SECTION_2_CONTENT]
+<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+
+## [SECTION_3_NAME]
+<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+
+[SECTION_3_CONTENT]
+<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
 
 ## Governance
+<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-- **Constitution Version**: 0.7.0
-- **Ratification Date**: TODO(RATIFICATION_DATE): Needs to be set on initial ratification
-- **Last Amended Date**: 2025-12-07
-- **Amendment Procedure**: All amendments MUST be proposed as pull requests, reviewed, and approved by a consensus of core contributors. Minor (patch) updates may be fast-tracked; major (breaking) changes require a formal RFC process.
-- **Versioning Policy**: This constitution follows Semantic Versioning. MAJOR versions for backward-incompatible changes, MINOR for new principles or sections, PATCH for clarifications or typo fixes.
-- **Compliance Review**: Compliance with these principles will be reviewed quarterly during project retrospectives.
+[GOVERNANCE_RULES]
+<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
 
-## Project Principles
-
-### Principle 1: Clarity and Simplicity
-**Description**: Solutions MUST prioritize clarity and simplicity. Code should be easy to understand, maintain, and extend. Avoid unnecessary complexity or over-engineering.
-**Rationale**: Complex systems are harder to debug, more prone to errors, and slower to develop. Simplicity fosters collaboration and reduces cognitive load.
-
-### Principle 2: Testability and Quality
-**Description**: All new features and bug fixes MUST be accompanied by comprehensive automated tests. Code MUST meet defined quality gates (e.g., linting, static analysis) before merging.
-**Rationale**: High test coverage and robust quality checks prevent regressions, ensure reliability, and build confidence in the codebase.
-
-### Principle 3: Modularity and Reusability
-**Description**: Components and modules SHOULD be designed with clear responsibilities and minimal dependencies, promoting reusability across the project.
-**Rationale**: Modular design reduces duplication, improves maintainability, and allows for easier independent development and deployment of features.
-
-### Principle 4: Performance and Efficiency
-**Description**: Performance and resource efficiency SHOULD be considered throughout the development lifecycle, with critical paths optimized and monitored.
-**Rationale**: Efficient systems provide a better user experience, reduce operational costs, and scale more effectively.
-
-### Principle 5: Security by Design
-**Description**: Security considerations MUST be integrated from the outset of design and implementation. All components handling sensitive data or exposed to external input MUST undergo security review.
-**Rationale**: Proactive security measures prevent vulnerabilities, protect user data, and maintain trust.
-
-### Principle 6: Documentation and Knowledge Sharing
-**Description**: Key architectural decisions, API contracts, and complex functionalities MUST be documented clearly and kept up-to-date. Knowledge sharing among the team is encouraged.
-**Rationale**: Good documentation reduces onboarding time for new contributors, ensures consistent understanding, and facilitates long-term project sustainability.
-
-### Principle 7: Scientific Grounding and Currency
-**Description**: All technical and theoretical claims MUST be backed by current research (ROS 2, Isaac Sim, VLA, RAG). Avoid speculative claims without academic citations. All concepts MUST be explained in a sequence that builds from fundamentals (Nodes $ightarrow$ URDF $ightarrow$ Simulation $ightarrow$ Advanced AI).
-**Rationale**: Strict adherence to peer-reviewed research and a structured pedagogical approach ensures factual accuracy, builds foundational understanding, and maintains the project's authority and relevance in rapidly evolving scientific fields.
-
-### Principle 8: Content Formatting and Asset Management
-**Description**: All chapter files MUST use MDX (.md or .mdx) format. All static assets (images, diagrams) MUST be stored in `static/img` and referenced with correct Docusaurus paths.
-**Rationale**: Standardizing content and asset formats ensures consistency, improves maintainability, and leverages Docusaurus's optimized asset handling and rendering capabilities.
-
-### Principle 9: Code Snippet and ROS 2 Framework Consistency
-**Description**: All code snippets MUST be marked with the correct language (e.g., `python` or `bash`). ROS 2 code MUST exclusively use the `rclpy` (Python) framework for consistency and ease of understanding.
-**Rationale**: Proper language marking enhances readability and syntax highlighting. Standardizing on `rclpy` for ROS 2 code ensures a uniform approach, simplifies examples, and reduces potential confusion for contributors and readers.
-
-### Principle 10: Primary Theme Color
-**Description**: The project's primary theme color MUST be `#007ACC` (a professional blue), set via the `--ifm-color-primary` CSS variable.
-**Rationale**: Establishing a consistent brand color ensures a professional and unified visual identity across all documentation and interfaces, aligning with design guidelines.
-
-### Principle 11: Hardware Relevance
-**Description**: All modules MUST reference the Hardware Requirements defined in the project (e.g., the necessity of an RTX GPU, the role of the Jetson Orin) to maintain real-world relevance.
-**Rationale**: Explicitly linking modules to specific hardware requirements ensures the practical applicability of the project's solutions, guides hardware-software co-design, and manages expectations regarding performance and compatibility.
-
-### Principle 12: Module Content Structure
-**Description**: All module content MUST follow a hierarchical structure: a main heading for the module, followed by subheadings for related content within that module. For example, a main heading 'Module ROS2' would have subheadings like 'Installation of ROS2'.
-**Rationale**: A consistent content structure improves readability, navigability, and pedagogical effectiveness, making it easier for readers to follow complex topics and locate specific information.
-
-### Principle 13: AI Architecture - RAG System
-**Description**: The AI-powered chatbot MUST utilize a Retrieval-Augmented Generation (RAG) system for generating responses. This involves retrieving relevant context from a knowledge base before feeding it to the language model.
-**Rationale**: RAG enhances the chatbot's ability to provide accurate, up-to-date, and contextually relevant information by grounding responses in documented facts, reducing hallucination, and improving trustworthiness.
-
-### Principle 14: Vector Database and Embeddings
-**Description**: The RAG system MUST use Qdrant as the vector database and OpenAI Embeddings for generating vector representations of Docusaurus markdown files.
-**Rationale**: Standardizing on Qdrant and OpenAI Embeddings ensures a robust, scalable, and efficient knowledge retrieval mechanism, leveraging industry-leading tools for vector storage and semantic search.
-
-### Principle 15: Backend - FastAPI and Anthropic Model
-**Description**: The chatbot backend MUST be implemented as a FastAPI server. It MUST integrate with an Anthropic (Claude) model for natural language generation, utilizing context retrieved from Qdrant.
-**Rationale**: FastAPI provides a high-performance, asynchronous framework suitable for API development, while the Anthropic (Claude) model offers advanced conversational AI capabilities for generating coherent and helpful responses.
-
-### Principle 16: Frontend - React Chat Widget
-**Description**: The chatbot frontend MUST be a React component integrated directly into the Docusaurus website.
-**Rationale**: Using a React component ensures seamless integration with the existing Docusaurus frontend, leveraging its component-based architecture for a consistent user experience and ease of development.
+**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
+<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->

@@ -1,20 +1,20 @@
 /**
- * Black & White Minimal Premium Theme for Docusaurus
- * Modern • Clean • Elegant
+ * Deep Blue & Teal Modern Theme for Docusaurus
+ * Tech-focused, clean, and animated.
  */
 
 /* ------------------------------
-   Light Mode — Black & White
+   Light Mode — Deep Blue & Teal
 ------------------------------ */
 :root {
-  --ifm-color-primary: #000000;        /* Pure Black */
-  --ifm-color-primary-dark: #111111;
-  --ifm-color-primary-darker: #1a1a1a;
-  --ifm-color-primary-darkest: #222222;
+  --ifm-color-primary: #0a2540;        /* Deep Blue */
+  --ifm-color-primary-dark: #081f36;
+  --ifm-color-primary-darker: #06192c;
+  --ifm-color-primary-darkest: #041322;
 
-  --ifm-color-primary-light: #333333;
-  --ifm-color-primary-lighter: #444444;
-  --ifm-color-primary-lightest: #555555;
+  --ifm-color-primary-light: #0c2b4a;
+  --ifm-color-primary-lighter: #0e3154;
+  --ifm-color-primary-lightest: #10375e;
 
   --ifm-font-family-base: "Inter", "Segoe UI", sans-serif;
   --ifm-code-font-size: 95%;
@@ -26,7 +26,7 @@
 }
 
 /* ------------------------------
-   Dark Mode — Pure White Accent
+   Dark Mode — White on Dark Blue
 ------------------------------ */
 [data-theme='dark'] {
   --ifm-color-primary: #ffffff;        /* Pure White */
@@ -39,61 +39,164 @@
   --ifm-color-primary-lightest: #ffffff;
 
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.15);
+  background-color: #0a2540;
 }
 
 /* ------------------------------
-   Buttons — Minimal Modern
+   Hero Section
+------------------------------ */
+
+.hero--primary {
+  background-color: #0a2540;
+  color: #fff;
+  padding-top: 6rem;    /* Keeps the current space above the title */
+  padding-bottom: 12rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #0a2540, #00d4ff);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  opacity: 0.3;
+  z-index: 0;
+  
+}
+
+
+
+/* 🚨 The CONTENT container must be positioned and have a higher z-index */
+.hero--primary .container {
+  position: relative; 
+  z-index: 2; /* Layer the text and buttons above the background (z-index: 0 or 1) */
+}
+
+/* 🚨 Safety measure for the buttons container */
+.buttons {
+  position: relative;
+  z-index: 3;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero__title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.hero__subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+
+/* ------------------------------
+   "What You'll Learn" Section
+------------------------------ */
+
+.features {
+  padding: 15rem 0;
+  background-color: #f9f9f9;
+}
+
+[data-theme='dark'] .features {
+  background-color: #081f36;
+}
+
+.featuresTitle {
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+.feature {
+  text-align: center;
+  padding: 12rem;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme='dark'] .feature {
+  background-color: #10375e;
+}
+
+.feature:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.feature h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+
+/* ------------------------------
+   Buttons — Modern & Animated
 ------------------------------ */
 .button {
   transition: all 0.3s ease-in-out;
   border-radius: 10px;
   font-weight: 600;
-  padding: 0.6rem 1.4rem;
+  padding: 0.8rem 1.8rem;
 }
 
-/* Black button */
-.button--primary {
-  background: #000 !important;
+.button--secondary {
+  border: 2px solid #fff !important;
   color: #fff !important;
-  border: none !important;
+  background: transparent !important;
 }
 
-.button--primary:hover {
-  background: #1a1a1a !important;
+.button--secondary:hover {
+  background: #fff !important;
+  color: #0a2540 !important;
   transform: translateY(-3px);
   box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
 }
 
-/* Outline button */
-.button--secondary {
-  border: 2px solid #000 !important;
-  color: #000 !important;
-  background: #fff !important;
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
 }
 
-.button--secondary:hover {
-  background: #000 !important;
-  color: #fff !important;
-  transform: translateY(-3px);
+.animated-button {
+  animation: pulse 2s infinite;
 }
 
-/* ------------------------------
-   Cards — Modern Lift Effect
------------------------------- */
-.card {
-  border-radius: 16px !important;
-  transition: all 0.25s ease;
-  border: 1px solid #e1e1e1;
+.animated-button:hover {
+  transform: scale(1.05);
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.15);
-}
 
 /* ------------------------------
-   Navbar — Glass Black & White
+   General Styles
 ------------------------------ */
+
 .navbar {
   backdrop-filter: blur(14px);
   background: rgba(255, 255, 255, 0.8) !important;
@@ -101,21 +204,10 @@
 }
 
 [data-theme='dark'] .navbar {
-  background: rgba(0, 0, 0, 0.7) !important;
-  border-bottom: 1px solid #333;
+  background: rgba(10, 37, 64, 0.7) !important;
+  border-bottom: 1px solid #081f36;
 }
 
-/* ------------------------------
-   Code Blocks
------------------------------- */
-.codeBlock {
-  border-radius: 12px !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-/* ------------------------------
-   Typography — Crisp Minimal
------------------------------- */
 h1, h2, h3, h4 {
   font-family: "Inter", "Segoe UI", sans-serif;
   font-weight: 700 !important;
@@ -126,36 +218,3 @@ p, li {
   font-size: 17px;
   line-height: 1.65;
 }
-
-/* ------------------------------
-   Urdu Translator Button
------------------------------- */
-.urdu-translate-button:hover {
-  background-color: #1b5e20 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.4) !important;
-}
-
-.urdu-translate-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-#urdu-translator-root {
-  display: flex;
-  align-items: center;
-  margin-right: 8px;
-}
-
-/* Spinner animation */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Urdu font support */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
