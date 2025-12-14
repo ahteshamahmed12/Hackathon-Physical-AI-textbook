@@ -120,14 +120,25 @@ const config = {
               label: 'Discord',
               href: 'https://discordapp.com/invite/docusaurus',
             },
+          ],
+        },
+        {
+          title: 'Social',
+          items: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/your-github-account', // Replace with actual link
+            },
+            {
+              label: 'Vercel',
+              href: 'https://vercel.com/your-vercel-account', // Replace with actual link
+            },
             {
               label: 'X',
               href: 'https://x.com/docusaurus',
             },
           ],
         },
-        // 🚀 FIX 4: Removed the 'More' section as it contained the broken blog link
-        // and the GitHub link is already in the navbar.
       ],
       copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
     },

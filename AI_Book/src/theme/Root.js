@@ -10,6 +10,7 @@
 import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import UrduTranslator from '../components/UrduTranslator';
+import FloatingChatbot from '../components/FloatingChatbot'; // Import FloatingChatbot
 
 export default function Root({ children }) {
   useEffect(() => {
@@ -37,5 +38,10 @@ export default function Root({ children }) {
     return () => observer.disconnect();
   }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <FloatingChatbot /> {/* Render FloatingChatbot */}
+    </>
+  );
 }
