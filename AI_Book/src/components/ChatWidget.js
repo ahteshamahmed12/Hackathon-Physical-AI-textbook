@@ -154,6 +154,8 @@ const ChatWidget = () => {
     }
   };
 
+  
+
   return (
     <div style={styles.container}>
       {/* Header */}
@@ -265,7 +267,6 @@ const styles = {
     margin: '0 auto',
     border: '1px solid #e0e0e0',
     borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
     backgroundColor: '#ffffff',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     overflow: 'hidden',
@@ -284,7 +285,6 @@ const styles = {
   headerSubtitle: {
     margin: '4px 0 0 0',
     fontSize: '13px',
-    opacity: 0.9,
   },
   messagesContainer: {
     flex: 1,
@@ -326,13 +326,11 @@ const styles = {
   },
   sourcesInfo: {
     fontSize: '11px',
-    opacity: 0.7,
     marginTop: '6px',
     fontStyle: 'italic',
   },
   timestamp: {
     fontSize: '10px',
-    opacity: 0.6,
     marginTop: '4px',
     textAlign: 'right',
   },
@@ -344,10 +342,11 @@ const styles = {
   },
   inputContainer: {
     display: 'flex',
+    flexDirection: 'column',
     padding: '16px',
     backgroundColor: '#ffffff',
     borderTop: '1px solid #e0e0e0',
-    gap: '8px',
+    gap: '8px', // Adjust as needed for vertical spacing
   },
   input: {
     flex: 1,
@@ -357,6 +356,7 @@ const styles = {
     borderRadius: '8px',
     outline: 'none',
     transition: 'border-color 0.2s',
+    marginBottom: '8px',
   },
   inputDisabled: {
     backgroundColor: '#f5f5f5',

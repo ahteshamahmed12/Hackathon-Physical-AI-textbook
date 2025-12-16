@@ -1,0 +1,1 @@
+I have successfully fixed the blurry and opaque text and background issue in the RAG chatbot. Please refresh the page to see the changes.

@@ -1,13 +1,13 @@
 /**
  * Deep Blue & Teal Modern Theme for Docusaurus
- * Tech-focused, clean, and animated.
+ * BLUR-FREE • CHATBOT SAFE
  */
 
 /* ------------------------------
-   Light Mode — Deep Blue & Teal
+   Light Mode
 ------------------------------ */
 :root {
-  --ifm-color-primary: #0a2540;        /* Deep Blue */
+  --ifm-color-primary: #0a2540;
   --ifm-color-primary-dark: #081f36;
   --ifm-color-primary-darker: #06192c;
   --ifm-color-primary-darkest: #041322;
@@ -20,67 +20,53 @@
   --ifm-code-font-size: 95%;
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.08);
-
-  /* Clean minimal shadows */
-  --ifm-global-shadow-lw: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 /* ------------------------------
-   Dark Mode — White on Dark Blue
+   Dark Mode
 ------------------------------ */
 [data-theme='dark'] {
-  --ifm-color-primary: #ffffff;        /* Pure White */
+  --ifm-color-primary: #ffffff;
   --ifm-color-primary-dark: #e6e6e6;
   --ifm-color-primary-darker: #cccccc;
   --ifm-color-primary-darkest: #b3b3b3;
-
-  --ifm-color-primary-light: #ffffff;
-  --ifm-color-primary-lighter: #ffffff;
-  --ifm-color-primary-lightest: #ffffff;
 
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.15);
   background-color: #0a2540;
 }
 
 /* ------------------------------
-   Hero Section
+   Hero Section (FIXED)
 ------------------------------ */
-
 .hero--primary {
   background-color: #0a2540;
-  color: #fff;
-  padding-top: 6rem;    /* Keeps the current space above the title */
-  padding-bottom: 12rem;
+  color: #ffffff;
+  padding-top: 6rem;
+  padding-bottom: 10rem;
   text-align: center;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
+
+  /* 🔥 Critical fixes */
+  isolation: isolate;
+  overflow: clip;
 }
 
 .hero--primary::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: linear-gradient(45deg, #0a2540, #00d4ff);
   background-size: 400% 400%;
   animation: gradientAnimation 15s ease infinite;
-  opacity: 0.3;
+  opacity: 0.3; /* FIXED */
   z-index: 0;
-  
 }
 
-
-
-/* 🚨 The CONTENT container must be positioned and have a higher z-index */
 .hero--primary .container {
-  position: relative; 
-  z-index: 2; /* Layer the text and buttons above the background (z-index: 0 or 1) */
+  position: relative;
+  z-index: 2;
 }
 
-/* 🚨 Safety measure for the buttons container */
 .buttons {
   position: relative;
   z-index: 3;
@@ -93,25 +79,22 @@
 }
 
 .hero__title {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   font-weight: 800;
-  margin-bottom: 1rem;
 }
 
 .hero__subtitle {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 300;
   max-width: 800px;
   margin: 0 auto 2rem;
 }
 
-
 /* ------------------------------
-   "What You'll Learn" Section
+   Features (GPU SAFE)
 ------------------------------ */
-
 .features {
-  padding: 15rem 0;
+  padding: 6rem 0;
   background-color: #f9f9f9;
 }
 
@@ -119,18 +102,13 @@
   background-color: #081f36;
 }
 
-.featuresTitle {
-  text-align: center;
-  padding-bottom: 3rem;
-}
-
 .feature {
   text-align: center;
-  padding: 12rem;
+  padding: 3rem;
   border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 [data-theme='dark'] .feature {
@@ -138,19 +116,11 @@
 }
 
 .feature:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
 }
-
-.feature h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
 
 /* ------------------------------
-   Buttons — Modern & Animated
+   Buttons
 ------------------------------ */
 .button {
   transition: all 0.3s ease-in-out;
@@ -160,58 +130,51 @@
 }
 
 .button--secondary {
-  border: 2px solid #fff !important;
-  color: #fff !important;
-  background: transparent !important;
+  border: 3px solid #0a2540 !important;
+  color: #000000 !important;
+  background-color: #ffffff;
+
+}
+
+.button--primary-1{
+  color:#000000
 }
 
 .button--secondary:hover {
-  background: #fff !important;
+  background: #ffffff !important;
   color: #0a2540 !important;
   transform: translateY(-3px);
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
 }
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-  }
-}
+.button--primary{
+border: 1px;
+border-color: #0a2540;
 
-.animated-button {
-  animation: pulse 2s infinite;
 }
-
-.animated-button:hover {
-  transform: scale(1.05);
-}
-
 
 /* ------------------------------
-   General Styles
+   Navbar (NO BLUR)
 ------------------------------ */
-
 .navbar {
-  backdrop-filter: blur(14px);
-  background: rgba(255, 255, 255, 0.8) !important;
+  background: #ffffff !important;
   border-bottom: 1px solid #eaeaea;
+  filter: none !important;
+  opacity: 1 !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 [data-theme='dark'] .navbar {
-  background: rgba(10, 37, 64, 0.7) !important;
+  background: #0a2540 !important;
   border-bottom: 1px solid #081f36;
 }
 
+/* ------------------------------
+   Typography
+------------------------------ */
 h1, h2, h3, h4 {
   font-family: "Inter", "Segoe UI", sans-serif;
   font-weight: 700 !important;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.4px;
 }
 
 p, li {
@@ -220,13 +183,11 @@ p, li {
 }
 
 /* ------------------------------
-   Sidebar — Active Link & Hover
+   Sidebar
 ------------------------------ */
-
 .menu__link {
   transition: background-color 0.3s ease;
   border-radius: 4px;
-  margin: 2px 0;
 }
 
 .menu__link:hover {
@@ -238,66 +199,61 @@ p, li {
 }
 
 .menu__link--active {
-  background-color: rgba(10, 37, 64, 0.1);
-  border-left: 3px solid var(--ifm-color-primary);
-}
-
-[data-theme='dark'] .menu__link--active {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(10, 37, 64, 0.12);
   border-left: 3px solid var(--ifm-color-primary);
 }
 
 /* ------------------------------
-   Footer — Modern & Animated
+   Footer
 ------------------------------ */
-
 .footer {
   background: #0a2540;
-  color: #fff;
+  color: #ffffff;
   padding: 4rem 0;
 }
 
-.footer--dark {
-    --ifm-footer-background-color: #0a2540;
+/* ------------------------------
+   🔥 CHATBOT HARD ISOLATION
+------------------------------ */
+.chatbot,
+.chatbot * {
+  filter: none !important;
+  backdrop-filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-.footer__title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+/* ----------------------------------------------------
+   🚨 CRITICAL FIXES FOR DARK MODE BLURRINESS ONLY
+   Focusing exclusively on forcing SHARPNESS for LIGHT TEXT on DARK BACKGROUND.
+---------------------------------------------------- */
+[data-theme='dark'] .chatbot,
+[data-theme='dark'] .chat-widget,
+[data-theme='dark'] .floating-chatbot-wrapper {
+    /* Reinforce Dark Background for isolation */
+    background-color: #081f36 !important; /* Darker blue from your theme */
+    
+    /* Aggressive fixes for layer issues */
+    transform: translateZ(0) scale(1.0001) !important; 
+    filter: none !important;
 }
 
-.footer__items {
-  list-style: none;
-  padding: 0;
-}
-
-.footer__item {
-  margin-bottom: 0.5rem;
-}
-
-.footer__link {
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.footer__link:hover {
-  color: #00d4ff;
-}
-
-.footer__link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background-color: #00d4ff;
-  transition: width 0.3s ease;
-}
-
-.footer__link:hover::after {
-  width: 100%;
+/* Target ALL text elements inside the widget when in Dark Mode */
+[data-theme='dark'] .chatbot *,
+[data-theme='dark'] .chat-widget *,
+[data-theme='dark'] .floating-chatbot-wrapper * {
+    /* 1. CRITICAL: Force grayscale anti-aliasing */
+    -webkit-font-smoothing: grayscale !important; 
+    -moz-osx-font-smoothing: grayscale !important;
+    
+    /* 2. Reinforce optimal rendering */
+    text-rendering: optimizeLegibility !important; 
+    
+    /* 3. The outline trick to force re-render */
+    outline: 1px solid transparent !important; 
+    
+    /* Optional: Slightly increase font weight for visual density against dark */
+    font-weight: 450 !important; /* A middle ground if your theme uses 300/400 */
 }

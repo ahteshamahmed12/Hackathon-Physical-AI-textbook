@@ -79,7 +79,7 @@ const FloatingChatbot = () => {
 
 const styles = {
   container: {
-    position: 'fixed',
+    position: 'absolute',
     bottom: '20px',
     right: '20px',
     zIndex: 1000,
@@ -93,7 +93,6 @@ const styles = {
     height: '60px',
     fontSize: '18px',
     cursor: 'pointer',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -106,11 +105,10 @@ const styles = {
     height: '400px',
     backgroundColor: 'white',
     borderRadius: '10px',
-    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
-  },
+    fontFamily: '"Inter", "Segoe UI", sans-serif',
   messagesContainer: {
     flexGrow: 1,
     padding: '10px',
@@ -153,6 +151,6 @@ const styles = {
     padding: '8px 15px',
     cursor: 'pointer',
   },
-};
+}};
 
 export default FloatingChatbot;

@@ -205,7 +205,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '6px',
-    boxShadow: '0 2px 8px rgba(46, 125, 50, 0.3)',
   },
   spinner: {
     animation: 'spin 1s linear infinite',
@@ -231,7 +230,6 @@ const styles = {
     maxHeight: '85vh',
     display: 'flex',
     flexDirection: 'column',
-    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
     overflow: 'hidden',
   },
   modalHeader: {
@@ -320,7 +318,6 @@ const styles = {
     color: '#856404',
     padding: '16px 20px',
     borderRadius: '8px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
     display: 'flex',
     alignItems: 'center',
     gap: '12px',

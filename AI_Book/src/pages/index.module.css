@@ -1,13 +1,17 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * CSS Module — Blur-Safe Hero
  */
 
-.heroBanner {
+ .heroBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
-  overflow: hidden;
+
+  /* Prevent GPU blending issues */
+  isolation: isolate;
+
+  /* Safer overflow handling */
+  overflow: clip;
 }
 
 @media screen and (max-width: 996px) {
@@ -20,7 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem; /* Space between text and image */
+  gap: 2rem;
   padding: 2rem 0;
 }
 
@@ -40,13 +44,15 @@
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  /* GPU-safe transform handling */
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+  transform-origin: center;
 }
 
 .heroImage:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 @media screen and (max-width: 996px) {
@@ -58,4 +64,15 @@
   .heroTextContent {
     text-align: center;
   }
+}
+
+/* 🔥 EXTRA SAFETY — If chatbot exists inside hero */
+.chatbot,
+.chatbot * {
+  filter: none !important;
+  backdrop-filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }

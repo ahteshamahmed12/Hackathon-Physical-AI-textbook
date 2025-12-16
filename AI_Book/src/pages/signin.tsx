@@ -47,7 +47,7 @@ function SignIn() {
               required
             />
           </div>
-          <button type="submit" className="button button--primary" style={{ padding: '10px', fontSize: '18px', cursor: 'pointer', marginTop: '10px' }}>
+          <button type="submit" className="button button--primary-1" style={{ padding: '10px', fontSize: '18px',  cursor: 'pointer', marginTop: '10px' }}>
             Sign In
           </button>
         </form>
