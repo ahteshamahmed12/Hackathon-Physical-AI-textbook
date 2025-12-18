@@ -1,73 +1,112 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const FloatingChatbot = () => {
+  const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // Prevent SSR hydration crash
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const toggleChat = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(prev => !prev);
   };
 
   const sendMessage = async () => {
-    if (input.trim() === '') return;
+    if (!input.trim() || loading) return;
 
-    const userMessage = { sender: 'user', text: input };
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    const userText = input;
     setInput('');
+    setLoading(true);
+
+    setMessages(prev => [
+      ...prev,
+      { sender: 'user', text: userText }
+    ]);
 
     try {
-      const response = await fetch('https://vercel.com/ahtesham-ahmeds-projects/hackathon-physical-ai-textbook', {
+      const response = await fetch('http://localhost:8000/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ query: userText }),
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const text = await response.text();
+        throw new Error(text);
       }
 
       const data = await response.json();
-      const botMessage = { sender: 'bot', text: data.response || 'Error: No response from API.' };
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-    } catch (error) {
-      console.error('Error fetching chat response:', error);
-      const errorMessage = { sender: 'bot', text: 'Sorry, something went wrong. Please try again later.' };
-      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+
+      setMessages(prev => [
+        ...prev,
+        { sender: 'bot', text: data.response }
+      ]);
+
+    } catch (err) {
+      console.error('Chat error:', err);
+
+      setMessages(prev => [
+        ...prev,
+        {
+          sender: 'bot',
+          text: 'Sorry, the chat service is unavailable right now.',
+        }
+      ]);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div style={styles.container}>
-      <button onClick={toggleChat} style={styles.floatingButton}>
-        {isOpen ? 'X' : 'Chat'}
+      <button style={styles.floatingButton} onClick={toggleChat}>
+        {isOpen ? '✖' : '💬'}
       </button>
 
       {isOpen && (
         <div style={styles.chatWindow}>
+          <div style={styles.header}>
+            Documentation Assistant
+          </div>
+
           <div style={styles.messagesContainer}>
             {messages.map((msg, index) => (
-              <div key={index} style={msg.sender === 'user' ? styles.userMessage : styles.botMessage}>
+              <div
+                key={index}
+                style={msg.sender === 'user'
+                  ? styles.userMessage
+                  : styles.botMessage
+                }
+              >
                 {msg.text}
               </div>
             ))}
+
+            {loading && (
+              <div style={styles.botMessage}>
+                Typing…
+              </div>
+            )}
           </div>
+
           <div style={styles.inputContainer}>
             <input
-              type="text"
+              style={styles.input}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  sendMessage();
-                }
-              }}
-              style={styles.input}
-              placeholder="Type your message..."
+              onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+              placeholder="Ask something..."
             />
-            <button onClick={sendMessage} style={styles.sendButton}>
+            <button style={styles.sendButton} onClick={sendMessage}>
               Send
             </button>
           </div>
@@ -79,78 +118,94 @@ const FloatingChatbot = () => {
 
 const styles = {
   container: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: '20px',
     right: '20px',
-    zIndex: 1000,
+    zIndex: 9999,
   },
+
   floatingButton: {
-    backgroundColor: '#0a2540',
-    color: 'white',
-    border: 'none',
+    width: '56px',
+    height: '56px',
     borderRadius: '50%',
-    width: '60px',
-    height: '60px',
-    fontSize: '18px',
+    border: 'none',
+    backgroundColor: '#0a2540',
+    color: '#fff',
+    fontSize: '22px',
     cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+
   chatWindow: {
     position: 'absolute',
-    bottom: '80px',
+    bottom: '70px',
     right: '0',
-    width: '300px',
-    height: '400px',
-    backgroundColor: 'white',
-    borderRadius: '10px',
+    width: '320px',
+    height: '420px',
+    backgroundColor: '#ffffff',
+    borderRadius: '12px',
+    boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
-    fontFamily: '"Inter", "Segoe UI", sans-serif',
+    fontFamily: 'Inter, sans-serif',
+  },
+
+  header: {
+    padding: '12px',
+    backgroundColor: '#0a2540',
+    color: 'white',
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+
   messagesContainer: {
     flexGrow: 1,
-    padding: '10px',
+    padding: '12px',
     overflowY: 'auto',
-    borderBottom: '1px solid #eee',
+    backgroundColor: '#f7f7f7',
   },
+
   userMessage: {
-    backgroundColor: '#e6f7ff',
-    padding: '8px',
-    borderRadius: '5px',
-    marginBottom: '5px',
+    backgroundColor: '#d6ebff',
+    padding: '8px 10px',
+    borderRadius: '8px',
+    marginBottom: '8px',
     alignSelf: 'flex-end',
-    textAlign: 'right',
+    maxWidth: '85%',
   },
+
   botMessage: {
-    backgroundColor: '#f0f0f0',
-    padding: '8px',
-    borderRadius: '5px',
-    marginBottom: '5px',
+    backgroundColor: '#eeeeee',
+    padding: '8px 10px',
+    borderRadius: '8px',
+    marginBottom: '8px',
     alignSelf: 'flex-start',
-    textAlign: 'left',
+    maxWidth: '85%',
   },
+
   inputContainer: {
     display: 'flex',
     padding: '10px',
-    borderTop: '1px solid #eee',
+    borderTop: '1px solid #ddd',
   },
+
   input: {
     flexGrow: 1,
-    border: '1px solid #ddd',
-    borderRadius: '5px',
     padding: '8px',
-    marginRight: '10px',
+    borderRadius: '6px',
+    border: '1px solid #ccc',
+    outline: 'none',
   },
+
   sendButton: {
+    marginLeft: '8px',
+    padding: '8px 14px',
     backgroundColor: '#0a2540',
     color: 'white',
     border: 'none',
-    borderRadius: '5px',
-    padding: '8px 15px',
+    borderRadius: '6px',
     cursor: 'pointer',
   },
-}};
+};
 
 export default FloatingChatbot;
