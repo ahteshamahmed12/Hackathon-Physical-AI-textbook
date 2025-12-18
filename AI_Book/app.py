@@ -12,7 +12,7 @@ load_dotenv()
 embedder = SentenceTransformer("all-MiniLM-L6-v2") # Local model (384 dims)
 client = QdrantClient(url=os.getenv("QDRANT_URL"), api_key=os.getenv("QDRANT_API_KEY"))
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.0-flash")
 
 app = FastAPI()
 
