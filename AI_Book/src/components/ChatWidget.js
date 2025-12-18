@@ -166,84 +166,86 @@ const ChatWidget = () => {
         </p>
       </div>
 
-      {/* Messages Container */}
-      <div style={styles.messagesContainer}>
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            style={{
-              ...styles.messageWrapper,
-              justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
-            }}
-          >
+      <div style={styles.chatContent}>
+        {/* Messages Container */}
+        <div style={styles.messagesContainer}>
+          {messages.map((message, index) => (
             <div
+              key={index}
               style={{
-                ...styles.messageBubble,
-                ...(message.sender === 'user' ? styles.userBubble : styles.botBubble),
-                ...(message.isError ? styles.errorBubble : {}),
+                ...styles.messageWrapper,
+                justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
               }}
             >
-              <div style={styles.messageText}>{message.text}</div>
+              <div
+                style={{
+                  ...styles.messageBubble,
+                  ...(message.sender === 'user' ? styles.userBubble : styles.botBubble),
+                  ...(message.isError ? styles.errorBubble : {}),
+                }}
+              >
+                <div style={styles.messageText}>{message.text}</div>
 
-              {/* Show sources count if available */}
-              {message.sourcesCount && (
-                <div style={styles.sourcesInfo}>
-                  📚 {message.sourcesCount} source{message.sourcesCount !== 1 ? 's' : ''} used
+                {/* Show sources count if available */}
+                {message.sourcesCount && (
+                  <div style={styles.sourcesInfo}>
+                    📚 {message.sourcesCount} source{message.sourcesCount !== 1 ? 's' : ''} used
+                  </div>
+                )}
+
+                {/* Timestamp */}
+                <div style={styles.timestamp}>
+                  {message.timestamp.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
                 </div>
-              )}
-
-              {/* Timestamp */}
-              <div style={styles.timestamp}>
-                {message.timestamp.toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
               </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {/* Loading indicator */}
-        {isLoading && (
-          <div style={{ ...styles.messageWrapper, justifyContent: 'flex-start' }}>
-            <div style={{ ...styles.messageBubble, ...styles.botBubble }}>
-              <div style={styles.loadingDots}>
-                <span>●</span>
-                <span>●</span>
-                <span>●</span>
+          {/* Loading indicator */}
+          {isLoading && (
+            <div style={{ ...styles.messageWrapper, justifyContent: 'flex-start' }}>
+              <div style={{ ...styles.messageBubble, ...styles.botBubble }}>
+                <div style={styles.loadingDots}>
+                  <span>●</span>
+                  <span>●</span>
+                  <span>●</span>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Auto-scroll anchor */}
-        <div ref={messagesEndRef} />
-      </div>
+          {/* Auto-scroll anchor */}
+          <div ref={messagesEndRef} />
+        </div>
 
-      {/* Input Container */}
-      <div style={styles.inputContainer}>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Type your question..."
-          disabled={isLoading}
-          style={{
-            ...styles.input,
-            ...(isLoading ? styles.inputDisabled : {}),
-          }}
-        />
-        <button
-          onClick={sendMessage}
-          disabled={isLoading || !inputValue.trim()}
-          style={{
-            ...styles.sendButton,
-            ...((isLoading || !inputValue.trim()) ? styles.sendButtonDisabled : {}),
-          }}
-        >
-          {isLoading ? '⏳' : '📤'}
-        </button>
+        {/* Input Area */}
+        <div style={styles.inputArea}>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your question..."
+            disabled={isLoading}
+            style={{
+              ...styles.input,
+              ...(isLoading ? styles.inputDisabled : {}),
+            }}
+          />
+          <button
+            onClick={sendMessage}
+            disabled={isLoading || !inputValue.trim()}
+            style={{
+              ...styles.sendButton,
+              ...((isLoading || !inputValue.trim()) ? styles.sendButtonDisabled : {}),
+            }}
+          >
+            {isLoading ? '⏳' : '📤'}
+          </button>
+        </div>
       </div>
 
       {/* Error indicator */}
@@ -263,7 +265,7 @@ const styles = {
     flexDirection: 'column',
     width: '100%',
     maxWidth: '800px',
-    height: '600px',
+    height: '600px', // Explicit height to enable flex grow for messagesContainer
     margin: '0 auto',
     border: '1px solid #e0e0e0',
     borderRadius: '12px',
@@ -286,8 +288,13 @@ const styles = {
     margin: '4px 0 0 0',
     fontSize: '13px',
   },
+  chatContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1, // This allows chatContent to take available space
+  },
   messagesContainer: {
-    flex: 1,
+    flexGrow: 1, // This makes the messages container expand
     overflowY: 'auto',
     padding: '16px',
     backgroundColor: '#f5f5f5',
@@ -340,23 +347,21 @@ const styles = {
     fontSize: '18px',
     animation: 'pulse 1.5s ease-in-out infinite',
   },
-  inputContainer: {
+  inputArea: {
     display: 'flex',
-    flexDirection: 'column',
     padding: '16px',
-    backgroundColor: '#ffffff',
     borderTop: '1px solid #e0e0e0',
-    gap: '8px', // Adjust as needed for vertical spacing
+    backgroundColor: '#ffffff',
+    gap: '8px', // Added gap for spacing between input and button
   },
   input: {
-    flex: 1,
+    flexGrow: 1, // Changed to flexGrow to better distribute space
     padding: '10px 14px',
     fontSize: '14px',
     border: '1px solid #d0d0d0',
     borderRadius: '8px',
     outline: 'none',
     transition: 'border-color 0.2s',
-    marginBottom: '8px',
   },
   inputDisabled: {
     backgroundColor: '#f5f5f5',
@@ -371,7 +376,7 @@ const styles = {
     borderRadius: '8px',
     cursor: 'pointer',
     transition: 'background-color 0.2s',
-    minWidth: '60px',
+    minWidth: '60px', // Ensured minWidth for consistent button size
   },
   sendButtonDisabled: {
     backgroundColor: '#cccccc',

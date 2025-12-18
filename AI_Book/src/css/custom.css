@@ -130,7 +130,7 @@
 }
 
 .button--secondary {
-  border: 3px solid #0a2540 !important;
+  border: 2px solid #0a2540 !important;
   color: #000000 !important;
   background-color: #ffffff;
 
@@ -160,6 +160,7 @@ border-color: #0a2540;
   border-bottom: 1px solid #eaeaea;
   filter: none !important;
   opacity: 1 !important;
+  padding-bottom: 3px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -229,9 +230,9 @@ p, li {
    🚨 CRITICAL FIXES FOR DARK MODE BLURRINESS ONLY
    Focusing exclusively on forcing SHARPNESS for LIGHT TEXT on DARK BACKGROUND.
 ---------------------------------------------------- */
-[data-theme='dark'] .chatbot,
-[data-theme='dark'] .chat-widget,
-[data-theme='dark'] .floating-chatbot-wrapper {
+[data-theme='light'] .chatbot,
+[data-theme='light'] .chat-widget,
+[data-theme='light'] .floating-chatbot-wrapper {
     /* Reinforce Dark Background for isolation */
     background-color: #081f36 !important; /* Darker blue from your theme */
     
@@ -257,3 +258,4 @@ p, li {
     /* Optional: Slightly increase font weight for visual density against dark */
     font-weight: 450 !important; /* A middle ground if your theme uses 300/400 */
 }
+
