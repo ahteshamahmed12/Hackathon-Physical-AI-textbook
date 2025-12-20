@@ -27,3 +27,10 @@ anthropic==0.18.1
 
 # Additional utilities
 httpx==0.26.0
+
+# Authentication
+SQLAlchemy==2.0.25
+passlib[bcrypt]==2024.1
+python-jose[cryptography]==3.3.0
+pydantic[email]==2.5.3
+

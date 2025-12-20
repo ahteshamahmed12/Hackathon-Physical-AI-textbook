@@ -10,25 +10,34 @@ function SignUp() {
   const [hasPC, setHasPC] = useState(false);
   const [hasRobot, setHasRobot] = useState(false);
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
-    // Combine all data for submission
-    const signupData = {
-      email,
-      password,
-      hardware: {
-        pc_available: hasPC,
-        robot_available: hasRobot
-      }
-    };
+    try {
+      const response = await fetch('http://localhost:8000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-    console.log('Form Submitted:', signupData);
-    alert('Account details sent to console!');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Signup failed');
+      }
+
+      alert('Signup successful! Please sign in.');
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (

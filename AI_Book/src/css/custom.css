@@ -166,8 +166,50 @@ border-color: #0a2540;
 
 [data-theme='dark'] .navbar {
   background: #0a2540 !important;
-  border-bottom: 1px solid #081f36;
 }
+
+/* Auth Buttons Customization */
+.navbar-sign-in, .navbar-sign-up, .navbar-log-out {
+  font-size: 1.1rem !important;
+  padding: 0.8rem 1.5rem !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+}
+
+.navbar-sign-in {
+  background-color: #f0f0f0 !important;
+  color: #333 !important;
+  border: 2px solid #ccc !important;
+}
+
+.navbar-sign-in:hover {
+  background-color: #e0e0e0 !important;
+  transform: translateY(-2px);
+}
+
+.navbar-sign-up {
+  background-color: #007bff !important;
+  color: white !important;
+  border: 2px solid #007bff !important;
+}
+
+.navbar-sign-up:hover {
+  background-color: #0056b3 !important;
+  transform: translateY(-2px);
+}
+
+.navbar-log-out {
+  background-color: #dc3545 !important;
+  color: white !important;
+  border: 2px solid #dc3545 !important;
+}
+
+.navbar-log-out:hover {
+  background-color: #c82333 !important;
+  transform: translateY(-2px);
+}
+
 
 /* ------------------------------
    Typography

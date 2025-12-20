@@ -73,7 +73,11 @@ const config = {
     navbar: {
       title: 'Physical AI & Humanoid Robotics Course',
       items: [
-        
+        {
+          type: 'html',
+          position: 'left',
+          value: '<div id="search-bar-root"></div>',
+        },
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
@@ -88,12 +92,18 @@ const config = {
         {
           type: 'html',
           position: 'right',
-          value: '<a class="button button--secondary navbar-sign-in" href="/signin">Sign In</a>',
+          value: '<div id="auth-buttons-root" style="display: flex; gap: 10px;"></div>',
         },
+
         {
           type: 'html',
           position: 'right',
-          value: '<a class="button button--primary navbar-sign-up" href="/signup">Sign Up</a>',
+          value: `
+            <div class="auth-buttons-container">
+              <button onclick="window.location.href='/signin'" class="button button--outline button--primary auth-btn">Sign In</button>
+              <button onclick="window.location.href='/signup'" class="button button--primary auth-btn">Sign Up</button>
+            </div>
+          `,
         },
       ],
     },
