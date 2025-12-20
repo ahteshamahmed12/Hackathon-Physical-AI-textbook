@@ -19,9 +19,12 @@ app = FastAPI()
 # 2. CORS (Allows Docusaurus to talk to the API)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Allow all origins for development
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,  # Cache preflight requests for 1 hour
 )
 
 class ChatQuery(BaseModel):
@@ -62,6 +65,27 @@ async def chat(query: ChatQuery):
 
     except Exception as e:
         print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+class TranslateQuery(BaseModel):
+    content: str
+    target_language: str
+
+@app.post("/translate")
+async def translate(query: TranslateQuery):
+    try:
+        # Construct the translation prompt
+        prompt = f"Translate the following text to {query.target_language}:\n\n---\n\n{query.content}"
+        
+        # Call the Gemini API for translation
+        response = model.generate_content(prompt)
+        
+        translated_text = response.text if response.candidates else "Translation not available."
+
+        return {"translated_content": translated_text}
+
+    except Exception as e:
+        print(f"Translation Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":

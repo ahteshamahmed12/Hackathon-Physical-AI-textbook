@@ -17,6 +17,7 @@ qdrant-client==1.7.3
 # LangChain for document processing
 langchain==0.1.5
 langchain-community==0.0.17
+sentence-transformers==2.2.2
 
 # Google Generative AI (Gemini) for embeddings
 google-generativeai==0.8.3
